@@ -7,8 +7,17 @@ from stl import mesh
 
 from sdf import sdf
 
-X, Y, Z = np.mgrid[-2:2:100j, -2:2:100j, -2:2:100j]
-values = sdf(X, Y, Z)
+N = 100  # resolution per axis
+xMin, xMax = -2, 2
+yMin, yMax = -2, 2
+zMin, zMax = -2, 2
+
+values = np.zeros((N, N, N), dtype=np.float32)
+
+for xIndex, x in enumerate(np.linspace(xMin, xMax, N)):
+    for yIndex, y in enumerate(np.linspace(yMin, yMax, N)):
+        for zIndex, z in enumerate(np.linspace(zMin, zMax, N)):
+            values[xIndex, yIndex, zIndex] = sdf(x, y, z)
 
 vertices, triangles = mcubes.marching_cubes(values, 0.0)
 

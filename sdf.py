@@ -1,4 +1,4 @@
-import numpy as np
+import math
 
 def sdf(x, y, z):
-    return -(np.sqrt(x**2 + y**2 + z**2) - 1.0)
+    return -(math.sqrt(x**2 + y**2 + z**2) - 1.0)
