@@ -24,8 +24,15 @@ def createCylinder(fn):
 
     return cylinder
 
-def sdf(x, y, z):
-    cylinder = createCylinder(cylinderWidth)
-    surface = createSurface(cylinder, 0.1)
-    truncateY = createTruncateY(surface, -1.5, 1.5)
-    return -truncateY(x, y, z)
+def createSdf(solid): 
+    def sdf(x, y, z):
+        cylinder = createCylinder(cylinderWidth)
+        surface = createSurface(cylinder, 0.1)
+
+        if (solid):
+            surface = cylinder
+
+        truncateY = createTruncateY(surface, -1.5, 1.5)
+        return -truncateY(x, y, z)
+    
+    return sdf
