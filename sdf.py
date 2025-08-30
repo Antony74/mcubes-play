@@ -2,7 +2,7 @@ import math
 
 def createSurface(fn, depth):
     def surface(x, y, z):
-        return abs(fn(x, y, z)) - depth                
+        return abs(fn(x, y, z) + depth) - depth
 
     return surface
 
